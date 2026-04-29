@@ -20,7 +20,7 @@ Add to your `.cursor/mcp.json` (project-level) or `~/.cursor/mcp.json` (global):
   "mcpServers": {
     "shipdoc": {
       "command": "npx",
-      "args": ["-y", "shipdoc"],
+      "args": ["-y", "https://github.com/nishat-khan/shipdoc.git"],
       "env": {
         "NOTION_API_KEY": "your-key-here"
       }
@@ -29,7 +29,7 @@ Add to your `.cursor/mcp.json` (project-level) or `~/.cursor/mcp.json` (global):
 }
 ```
 
-Restart Cursor (or toggle the server in Settings > MCP). That's it.
+Restart Cursor (or toggle the server in Settings > MCP). That's it — no npm account or manual cloning needed.
 
 ### Notion setup (optional, for `export_to_notion`)
 
@@ -73,7 +73,6 @@ Plans are reformatted into a clean structure:
 ## Development
 
 ```bash
-cd server
 npm install
 npm run dev          # watch mode
 npm run inspect      # test with MCP Inspector

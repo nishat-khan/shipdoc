@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "shipdoc": {
-      "command": "node",
-      "args": ["server/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "https://github.com/nishat-khan/shipdoc.git"],
       "env": {
         "NOTION_API_KEY": ""
       }

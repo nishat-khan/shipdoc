@@ -7,13 +7,10 @@
   "bin": {
     "shipdoc": "dist/index.js"
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "prepublishOnly": "tsc",
+    "prepare": "tsc",
     "inspect": "npm run build && npx @modelcontextprotocol/inspector node dist/index.js"
   },
   "keywords": [
