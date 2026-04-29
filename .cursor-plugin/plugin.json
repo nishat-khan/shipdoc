@@ -1,0 +1,6 @@
+{
+  "name": "shipdoc",
+  "version": "1.0.0",
+  "description": "Ship design docs and PRDs from Cursor Plan mode to Notion -- Mermaid diagrams included",
+  "author": { "name": "nish" }
+}

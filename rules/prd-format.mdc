@@ -1,0 +1,31 @@
+---
+description: Guidelines for structuring Plan mode output so it exports cleanly via ShipDoc
+globs:
+  - "**/*.plan.md"
+alwaysApply: false
+---
+
+# Plan Structure for Clean Export
+
+When creating plans in Plan mode, follow these guidelines so the plan exports cleanly as a PRD via ShipDoc:
+
+## Required sections
+
+1. **Clear H1 title** — use a descriptive project or feature name
+2. **Mermaid architecture diagram** — include at least one `mermaid` fenced code block showing the system design, data flow, or component relationships
+3. **Specific, actionable headings** — use H2/H3 for logical sections (Approach, Key Files, Dependencies, etc.)
+
+## Frontmatter
+
+The YAML frontmatter should include:
+- `name`: concise plan title
+- `overview`: 1-2 sentence summary
+- `todos`: list of actionable tasks with `id`, `content`, and `status` fields
+
+## Formatting tips
+
+- Use bullet lists for requirements and decisions
+- Use checklists (`- [ ]`) for task items within the body
+- Keep Mermaid diagrams focused — one diagram per concept rather than one massive diagram
+- Use bold for key terms and emphasis, not ALL CAPS
+- Include a "Key Design Decisions" or "Trade-offs" section to capture rationale
