@@ -1,14 +1,40 @@
 {
-  "name": "shipdoc-server",
+  "name": "shipdoc",
   "version": "1.0.0",
-  "description": "MCP server for ShipDoc -- exports Cursor plans to Notion and clipboard",
+  "description": "MCP server that exports Cursor plans as PRDs to Notion and clipboard — Mermaid diagrams included",
   "type": "module",
   "main": "dist/index.js",
+  "bin": {
+    "shipdoc": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
+    "prepublishOnly": "tsc",
     "inspect": "npm run build && npx @modelcontextprotocol/inspector node dist/index.js"
   },
+  "keywords": [
+    "mcp",
+    "cursor",
+    "notion",
+    "prd",
+    "design-doc",
+    "mermaid",
+    "model-context-protocol"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nishat-khan/shipdoc.git"
+  },
+  "homepage": "https://github.com/nishat-khan/shipdoc#readme",
+  "bugs": {
+    "url": "https://github.com/nishat-khan/shipdoc/issues"
+  },
+  "license": "MIT",
+  "author": "nish",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",
     "@notionhq/client": "^2.3.0",
