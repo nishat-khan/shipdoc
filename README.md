@@ -30,6 +30,8 @@ Restart Cursor (or toggle the server in Settings > MCP). That's it — no npm ac
 
 ### Notion setup
 
+The Notion API is free — no paid plan required.
+
 1. Go to [notion.so/my-integrations](https://www.notion.so/my-integrations) and create an integration
 2. Copy the API key and paste it into the `NOTION_API_KEY` field above
 3. Share your target Notion page with the integration
