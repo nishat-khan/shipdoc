@@ -1,11 +1,12 @@
 import { Client } from "@notionhq/client";
 import { parsePlan } from "../lib/parse-plan.js";
-import { formatPrd } from "../lib/format-prd.js";
+import { formatPrd, formatWithTemplate } from "../lib/format-prd.js";
 
 export interface ExportNotionInput {
   plan_path: string;
   parent_page_id: string;
   title?: string;
+  template_path?: string;
 }
 
 export async function exportToNotion(
@@ -21,7 +22,9 @@ export async function exportToNotion(
 
   const notion = new Client({ auth: apiKey });
   const plan = await parsePlan(input.plan_path);
-  const prdMarkdown = formatPrd(plan);
+  const prdMarkdown = input.template_path
+    ? await formatWithTemplate(plan, input.template_path)
+    : formatPrd(plan);
   const title = input.title ?? plan.name;
 
   const response = await notion.pages.create({

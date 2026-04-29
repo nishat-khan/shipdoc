@@ -3,7 +3,6 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import { exportToNotion } from "./tools/export-notion.js";
-import { copyToClipboard } from "./tools/copy-clipboard.js";
 
 const server = new McpServer({
   name: "shipdoc",
@@ -12,7 +11,7 @@ const server = new McpServer({
 
 server.tool(
   "export_to_notion",
-  "Export a Cursor plan as a formatted PRD to a Notion page, with Mermaid diagrams rendered natively",
+  "Export a Cursor plan as a formatted PRD to a Notion page. Supports custom templates via a markdown file with {{name}}, {{overview}}, {{body}}, {{architecture}}, {{tasks}} placeholders.",
   {
     plan_path: z.string().describe("Absolute path to the .plan.md file"),
     parent_page_id: z
@@ -22,33 +21,21 @@ server.tool(
       .string()
       .optional()
       .describe("Override the document title (defaults to plan name)"),
+    template_path: z
+      .string()
+      .optional()
+      .describe(
+        "Path to a custom markdown template file. Use placeholders: {{name}}, {{overview}}, {{body}}, {{architecture}}, {{tasks}}. If omitted, uses the default PRD format.",
+      ),
   },
-  async ({ plan_path, parent_page_id, title }) => {
+  async ({ plan_path, parent_page_id, title, template_path }) => {
     try {
-      const result = await exportToNotion({ plan_path, parent_page_id, title });
-      return { content: [{ type: "text", text: result }] };
-    } catch (err: any) {
-      return {
-        content: [{ type: "text", text: `Error: ${err.message}` }],
-        isError: true,
-      };
-    }
-  },
-);
-
-server.tool(
-  "copy_plan_to_clipboard",
-  "Copy a Cursor plan to the system clipboard as a formatted PRD or raw markdown",
-  {
-    plan_path: z.string().describe("Absolute path to the .plan.md file"),
-    format: z
-      .enum(["prd", "raw"])
-      .default("prd")
-      .describe("Export as formatted PRD or raw markdown"),
-  },
-  async ({ plan_path, format }) => {
-    try {
-      const result = await copyToClipboard({ plan_path, format });
+      const result = await exportToNotion({
+        plan_path,
+        parent_page_id,
+        title,
+        template_path,
+      });
       return { content: [{ type: "text", text: result }] };
     } catch (err: any) {
       return {
